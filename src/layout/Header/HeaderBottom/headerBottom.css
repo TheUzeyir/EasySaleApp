@@ -1,0 +1,22 @@
+.headerBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerBottomContainer{
+    width: 100%;
+    padding: 20px 0;
+    background: #F6F7FA;
+}
+
+.headerBottom_left{
+    font-weight: bold;
+    color: #8D94AD;
+    font-size: 20px;
+}
+.headerBottom_right{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

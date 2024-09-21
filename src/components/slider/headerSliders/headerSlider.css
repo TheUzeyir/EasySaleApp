@@ -1,0 +1,10 @@
+.headerSliderBox{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.headerSliderBoxText{
+    font-size: 15px;
+    font-weight: bold;
+}

@@ -1,0 +1,227 @@
+
+a{
+    text-decoration: none;
+}
+
+.container{
+    margin:0 108px;
+}
+
+#header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-top{
+    padding-top: 15px;
+    width: 100%;
+    background: #2A2036;
+    border-bottom: 1px solid gray;
+}
+.header-top .contact-links{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 40px;
+}
+.header-top .row .col-lg-6 {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    color: white;
+}
+.header-top ul{
+    display: flex;
+    width: 100%;
+    justify-content: end !important;
+    gap: 40px;
+}
+ul li{
+    list-style: none;
+}
+
+li{
+    cursor: pointer;
+}
+
+.navbar{
+    width: 100%;
+}
+
+.navbar-brand{
+    cursor: pointer;
+}
+
+.header-top .icon{
+    font-size: 18px;
+    color: white;
+}
+.header-top .tiktok{
+    font-size: 16px;
+}
+.header-top ul li span{
+    margin-left: 5px;
+    color: white;
+    margin-right: 15px;
+}
+#header .navbar{
+    background-color: #2A2036 !important;
+    padding: 20px 0;
+}
+#header .navbar a{
+    color: white !important;
+}
+.navbar .offcanvas-body{
+    width: 86%;
+    margin: auto;
+    color: white;
+}
+.navbar .offcanvas-body .icon{
+    font-size: 19px;
+    cursor: pointer;
+}
+.navbar .offcanvas-body span{
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 5px !important;
+    margin-left: 3px;
+    cursor: pointer;
+}
+.category-box{
+    width: 10%;
+    text-align: right;
+}
+.input-group{
+    width: 60%;
+    height: 40px;
+    display: flex;
+    border: none;
+    border-radius: 25px;
+    justify-content: space-between;
+}
+.navbar-expand-xl .offcanvas .offcanvas-body{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+.navbar-expand-xl .offcanvas .offcanvas-body .search-input{
+    width: 75%;
+    padding-left: 10px;
+    border: none;
+    border-left: 1px solid black    ;
+    border-radius: 25px;
+}
+
+.navbar-expand-xl .offcanvas .offcanvas-body select:focus,.navbar-expand-xl .offcanvas .offcanvas-body .search-input:focus{
+    outline: none;
+    border: none;
+    border: 1px dashed green;
+
+}
+.navbar-expand-xl .offcanvas .offcanvas-body select{
+    width: 15%;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+
+}
+
+.navbar-expand-xl .offcanvas .offcanvas-body .search-btn{
+    width: 10%;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.navbar-expand-xl .offcanvas .offcanvas-body .search-btn:hover {
+    background-color: #218838; 
+    box-shadow: 0 4px 10px rgba(33, 136, 56, 0.4);
+}
+.navbar-expand-xl .offcanvas .offcanvas-body .search-btn .icon{
+    font-size: 20px;
+}
+.adverts-box a {
+    font-weight: bold; 
+    padding: 10px 20px; 
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease; 
+}
+
+.adverts-box a:first-child {
+    background-color: #28a745; 
+    color: white;
+    padding: 10px 15px; 
+
+}
+.adverts-box .icon{
+    font-size: 22px !important;
+}
+.adverts-box a:first-child:hover {
+    background-color: #218838; 
+
+}
+
+.adverts-box a:last-child {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.adverts-box a:last-child:hover {
+    background-color: #e8590c;}
+
+.slick-arrow .slick-next {
+    color: #f39c12;
+}
+
+.slick-slide:not(:first-child) {
+    margin: 0 0 10px 0;
+}
+.slick-list {
+    margin: 0 10px;
+}
+ 
+.swiper {
+    width: 100%;
+    height: 100%;
+    padding: 10px 54px 10px 60px;
+    margin: 10px;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .swiper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-button-next {
+    color: #2A2036;
+  }
+    .swiper-button-prev {
+    color: #2A2036;
+  }
