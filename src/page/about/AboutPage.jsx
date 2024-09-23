@@ -7,9 +7,12 @@ import TermCondition from './TermCondition'
 import Faq from './Faq'
 import Contack from './Contack'
 import Info from "./Info"
+import { useNavigate } from 'react-router-dom';
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 const AboutPage = () => {
   const [activeSection, setActiveSection] = useState('info'); 
+  const navigate=useNavigate()
 
   const renderSection = () => {
     switch (activeSection) {
@@ -33,6 +36,7 @@ const AboutPage = () => {
       <Header/>
         <div className={style.aboutPage_head_container}>
           <div className="container">
+          <p className={style.aboutPage_goBack} onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>
           <div className={style.aboutPage_head}>
             <span
               className={`${style.aboutPage_head_title} ${activeSection === 'info' ? style.aboutPage_head_title_active : ''}`}

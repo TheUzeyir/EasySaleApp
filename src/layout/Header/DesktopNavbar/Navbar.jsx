@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import './../DesktopNavbar/style.css'
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { IoSearchSharp, IoAddSharp, IoFilter } from "react-icons/io5";
 import { FaCar, FaHome, FaTshirt, FaCouch } from 'react-icons/fa';
+import HeaderFilterCard from '../headerFilterCard/HeaderFilterCard';
+import './navbar.css';
 
-export default function Navbar() {
+const Navbar = () => {
     const [selectedCity, setSelectedCity] = useState('');
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [isFilterCardOpen, setFilterCardOpen] = useState(false); 
 
     const cities = ['Bakı', 'Gəncə', 'Sumqayıt', 'Şəki', 'Lənkəran'];
-
 
     const categories = [
         { name: 'Nəqliyyat', products: ['Skuter', 'Avtomobil', 'Motosiklet'], icon: <FaCar /> },
@@ -33,6 +34,10 @@ export default function Navbar() {
         setModalOpen(false);
     };
 
+    const toggleFilterCard = () => {
+        setFilterCardOpen((prev) => !prev);  // Toggles the filter card
+    };
+
     return (
         <>
             <nav className="navbar navbar-expand-xl bg-light align-items-center">
@@ -43,7 +48,7 @@ export default function Navbar() {
                     </button>
                     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div className="offcanvas-header">
-                            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menyular</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body">
@@ -64,12 +69,13 @@ export default function Navbar() {
                             </div>
                             <div className="adverts-box">
                                 <a href="#"><span><IoAddSharp className='icon' />Yeni Elan</span></a>
-                                <a href="#"><span><IoFilter className='icon' /> Filter</span></a>
+                                <a href="#"  onClick={toggleFilterCard} ><span><IoFilter className='icon'/> Filter</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
+            {isFilterCardOpen && <HeaderFilterCard isFilterCardOpen={isFilterCardOpen} />}
             {isModalOpen && (
                 <div className="modal category-modal">
                     <div className="modal-content">
@@ -83,7 +89,7 @@ export default function Navbar() {
                                             onMouseEnter={() => setSelectedCategory(category)}
                                             className="category-item"
                                         >
-                                            <span className="category-icon">{category.icon}</span> {/* Icon */}
+                                            <span className="category-icon">{category.icon}</span>
                                             {category.name}
                                         </div>
                                     ))}
@@ -106,4 +112,6 @@ export default function Navbar() {
             )}
         </>
     );
-}
+};
+
+export default Navbar;
