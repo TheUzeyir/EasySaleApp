@@ -32,7 +32,7 @@ const AboutPage = () => {
   };
 
   return (
-    <div>
+    <div> 
       <Header/>
         <div className={style.aboutPage_head_container}>
           <div className="container">

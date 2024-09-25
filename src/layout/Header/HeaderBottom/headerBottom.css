@@ -1,21 +1,24 @@
 .headerBottom{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    width: 100%;
 }
 
 .headerBottomContainer{
     width: 100%;
     padding: 20px 0;
     background: #F6F7FA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.headerBottom_left{
+.headerBottom_left{ 
     font-weight: bold;
     color: #8D94AD;
     font-size: 20px;
 }
-.headerBottom_right{
+ .headerBottom_right{
     color: blue;
     text-decoration: underline;
     cursor: pointer;

@@ -17,7 +17,6 @@ const Footer = () => {
   };
   return (
       <div className={style.footer}>
-       <div className="container">
       <div className={style.footerMain}>
         <div className={style.footerMain_infoBox}>
             <p className={style.footerMain_infoBox_title}>Our mission</p>
@@ -67,7 +66,6 @@ const Footer = () => {
             </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }

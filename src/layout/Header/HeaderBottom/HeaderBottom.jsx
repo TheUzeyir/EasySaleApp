@@ -6,8 +6,8 @@ export default function HeaderBottom() {
     <div className="headerBottomContainer">
       <div className="container">
         <div className='headerBottom'>
-          <p className='headerBottom_left'>VIP ELANLAR</p>
-          <p className='headerBottom_right'>Butun VIP elanlar</p>
+          <span className='headerBottom_left'>VIP ELANLAR</span>
+          <span className='headerBottom_right'>Butun VIP elanlar</span>
         </div>
       </div>
     </div>

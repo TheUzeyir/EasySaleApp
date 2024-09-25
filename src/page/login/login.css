@@ -5,7 +5,7 @@
 	box-sizing: border-box;
 }
 
-body {
+.SignUp {
 	background: #f6f5f7;
 	display: flex;
 	justify-content: center;
@@ -13,18 +13,15 @@ body {
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
+	margin:  50px;
 }
 
-h1 {
+.SignUp_title {
 	font-weight: bold;
 	margin: 0;
 }
 
-h2 {
-	text-align: center;
-}
-
-p {
+.SignUp_text {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -32,18 +29,18 @@ p {
 	margin: 20px 0 30px;
 }
 
-span {
+.SignUp_subtitle {
 	font-size: 12px;
 }
 
-a {
+.SignUps_linkText {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
 	margin: 15px 0;
 }
 
-button {
+.SignUp_icon {
 	border-radius: 20px;
 	border: 1px solid #FF4B2B;
 	background-color: #FF4B2B;
@@ -56,20 +53,24 @@ button {
 	transition: transform 80ms ease-in;
 }
 
-button:active {
+.SignUp_icon:active {
 	transform: scale(0.95);
 }
 
-button:focus {
+.SignUp_icon:focus {
 	outline: none;
 }
 
-button.ghost {
+.btn_ghost {
+	color: white;
 	background-color: transparent;
+	padding: 10px;
+	border-radius: 8px;
 	border-color: #FFFFFF;
+	
 }
 
-form {
+.SignUp_form {
 	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
@@ -80,7 +81,7 @@ form {
 	text-align: center;
 }
 
-input {
+.SignUp_input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
@@ -88,23 +89,30 @@ input {
 	width: 100%;
 }
 
-.container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
-	min-height: 480px;
+.containers {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 
+                0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* Otomatik yükseklik */
+    min-height: 480px;
+    z-index: 1; /* Arka planda kalmaması için */
 }
+
 
 .form-container {
 	position: absolute;
 	top: 0;
 	height: 100%;
 	transition: all 0.6s ease-in-out;
+	opacity: 1;
 }
 
 .sign-in-container {
@@ -113,19 +121,19 @@ input {
 	z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
+.containers.right-panel-active .sign-in-container {
 	transform: translateX(100%);
 }
 
 .sign-up-container {
 	left: 0;
 	width: 50%;
-	opacity: 0;
-	z-index: 1;
+	opacity: 1;
+	z-index: 2;
 }
 
-.container.right-panel-active .sign-up-container {
-	transform: translateX(100%);
+.containers.right-panel-active .sign-up-container {
+	transform: translateX(0%);
 	opacity: 1;
 	z-index: 5;
 	animation: show 0.6s;
@@ -154,50 +162,53 @@ input {
 	z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
+.containers.right-panel-active .overlay-container{
 	transform: translateX(-100%);
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 0 0;
-	color: #FFFFFF;
-	position: relative;
-	left: -100%;
-	height: 100%;
-	width: 200%;
-  	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
+    background: #FF416C;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    z-index: 5; /* Z-index değerini artırın */
 }
 
-.container.right-panel-active .overlay {
+.containers.right-panel-active .overlay {
   	transform: translateX(50%);
 }
 
 .overlay-panel {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 40px;
-	text-align: center;
-	top: 0;
-	height: 100%;
-	width: 50%;
-	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    z-index: 10; /* Z-index değerini artırın */
 }
+
 
 .overlay-left {
 	transform: translateX(-20%);
 }
 
-.container.right-panel-active .overlay-left {
+.containers.right-panel-active .overlay-left {
 	transform: translateX(0);
 }
 
@@ -225,27 +236,30 @@ input {
 	width: 40px;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
+.sign-up-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Temporary semi-transparent white */
 }
 
-footer p {
-    margin: 10px 0;
-}
 
-footer i {
-    color: red;
-}
+@media screen and (max-width: 768px) {
+    .containers {
+        flex-direction: column;
+    }
 
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
+    .overlay-container {
+        width: 100%;
+        left: 0;
+        top: auto;
+        bottom: 0;
+        height: 60%;
+    }
+
+    .form-container {
+        width: 100%;
+        height: 85%;
+    }
+
+    .containers.right-panel-active .overlay-container {
+        transform: translateY(0); 
+    }
 }

@@ -13,6 +13,9 @@
 .aboutPage_head_container{
     background: #F5F5F5;
     padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .aboutPage_head{
@@ -116,4 +119,25 @@
 
 .aboutPage_head_title_active{
     color: #8A53FE;
+}
+
+.faq_container,
+.contack_container,
+.Info_container,
+.rules_container,
+.TermCondition_container{
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:768px) {
+    .aboutPage_head{
+        font-size: 14px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .aboutPage_main_subtitle{
+        font-size: 14px;
+    }
 }

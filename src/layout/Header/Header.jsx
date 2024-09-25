@@ -7,7 +7,7 @@ import HeaderFilterCard from './headerFilterCard/HeaderFilterCard'
 
 export default function Header() {
   return (
-    <header id='header'>
+    <header className='header'>
       <HeaderTop/>
       <Navbar/>
       <HeaderFilterCard/>

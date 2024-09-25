@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { BsShop } from "react-icons/bs";
 import { IoCalendarNumber } from "react-icons/io5";
 
-const ProductCard = () => {
+const ProductCard = () => { 
   return (
     <div className="container">
         <div className={style.productCard_container}>

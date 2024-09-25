@@ -26,20 +26,22 @@ const Faq = () => {
   ];
 
   return (
-    <div className='container'>
-      {faqItems.map((item, index) => (
-        <section key={index} className={style.faq_card}>
-          <h4
-            className={style.faq_card_title}
-            onClick={() => clickBox(index)}
-          >
-            {item.question} <IoIosArrowDown className={`${style.faq_card_icon} ${openIndex === index ? style.faq_card_icon_rotate : ""}`} />
-          </h4>
-          <p className={`${style.faq_card_subtitle} ${openIndex === index ? style.faq_card_subtitle_disBlock : ""}`}>
-            {item.answer}
-          </p>
-        </section>
-      ))}
+    <div className={style.faq_container}>
+      <div className='container'>
+        {faqItems.map((item, index) => (
+          <section key={index} className={style.faq_card}>
+            <h4
+              className={style.faq_card_title}
+              onClick={() => clickBox(index)}
+            >
+              {item.question} <IoIosArrowDown className={`${style.faq_card_icon} ${openIndex === index ? style.faq_card_icon_rotate : ""}`} />
+            </h4>
+            <p className={`${style.faq_card_subtitle} ${openIndex === index ? style.faq_card_subtitle_disBlock : ""}`}>
+              {item.answer}
+            </p>
+          </section>
+        ))}
+      </div>
     </div>
   )
 }

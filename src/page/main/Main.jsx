@@ -2,15 +2,17 @@ import React from 'react'
 import Footer from '../../layout/footer/Footer'
 import Header from '../../layout/Header/Header'
 import ProductCard from '../../components/productCard/ProductCard'
-import SignUp from '../login/SignUp'
+import LoginPage from "../login/Login"
 
 const Main = () => {
   return (
-    <div>
-    {/* <Header/> */}
-     {/* <ProductCard/> */}
-     {/* <Footer/> */}
-     <SignUp/>
+    <div className="main_container">
+      <div className='main'>
+      {/* <Header/> */}
+      {/* <ProductCard/> */}
+      </div>
+      {/* <Footer/> */}
+      <LoginPage/>
     </div>
   )
 }

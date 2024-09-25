@@ -19,7 +19,7 @@ const DetailPage = () => {
     }
 
   return (
-    <div>
+    <div className={style.detailPage}> 
       <Header/>
       <div className="container">
       <p className={style.detailPage_goBack} onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>

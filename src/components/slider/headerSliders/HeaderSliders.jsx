@@ -15,14 +15,41 @@ export default function HeaderSliders() {
   return (
     <div className="container">
         <Swiper
-          slidesPerView={7}
-          spaceBetween={60}
-          loop={true}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          modules={[ Navigation]}
+  slidesPerView={7}
+  spaceBetween={80}
+  loop={true}
+  pagination={{
+    clickable: true,
+  }}
+  navigation={true}
+  modules={[Navigation]}
+  breakpoints={{
+    0: {
+        slidesPerView: 2,
+        spaceBetween: 55,
+      },
+    460: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
+    473: {
+        slidesPerView: 3,
+        spaceBetween: 55,
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 80,
+      },
+      993: {
+        slidesPerView: 5, 
+        spaceBetween: 40,
+      },
+      1080: {
+        slidesPerView: 6, 
+        spaceBetween: 55,
+      }
+    }}
+        
           className="mySwiper"
         >
           <SwiperSlide className='headerSliderBox'>
