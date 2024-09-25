@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const LogIn = () => {
     const [isRightPanelActive, setRightPanelActive] = useState(false);
@@ -12,8 +14,11 @@ const LogIn = () => {
         setRightPanelActive(false);
     }; 
 
+    const navigate=useNavigate()
+
     return (
         <div className="SignUp">
+            <p className='SignUp_goBack' onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>
             <div className={`containers ${isRightPanelActive ? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
                     <form className="SignUp_form" action="#">
