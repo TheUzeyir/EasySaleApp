@@ -132,6 +132,17 @@
 .TermCondition_container {
   display: flex;
   justify-content: center;
+  width: 100%;
+}
+
+.AboutPage_goBack {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.AboutPage_goBack:hover {
+  color: red;
 }
 
 @media screen and (max-width: 768px) {

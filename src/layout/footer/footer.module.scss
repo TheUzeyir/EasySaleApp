@@ -81,29 +81,7 @@
   }
   
   @media screen and (max-width: 968px) {
-    .footerMain {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      font-size: 15px;
+    .footer {
+      display: none;
     }
   }
-  @media screen and (max-width: 768px) {
-    .footer {
-      padding: 2rem 2rem;
-      padding-left: 6%;
-    }
-
-    .footerMain_title{
-      font-size: 18px;
-    }
-    .footerMain {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      font-size: 10px;
-    }
-    .footerMain_login_contackLogo {
-      font-size: 10px;
-    }
-    .footerMain_login_inputBox {
-      display: none;
-    }}

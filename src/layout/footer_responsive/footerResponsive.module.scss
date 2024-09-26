@@ -1,0 +1,46 @@
+.FooterResponsive_container{
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid gray;
+    margin-top: 40px;
+}
+
+.FooterResponsive{
+    padding: 20px 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+}
+
+.FooterResponsive_box{
+    width: 100%;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    padding-left: 50px;
+}
+
+.FooterResponsive_card{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.FooterResponsive_card_addProduct{
+    color: purple;
+    font-size: 40px;
+    margin-top: -40px;
+}
+
+@media screen and (min-width:968px) {
+    .FooterResponsive{display: none;
+    }
+}
+@media screen and (max-width:572px) {
+    .FooterResponsive_box{
+        padding-left: 10px;
+        grid-template-columns: repeat(2,1fr);
+    }
+}

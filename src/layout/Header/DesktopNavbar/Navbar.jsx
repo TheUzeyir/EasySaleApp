@@ -2,21 +2,18 @@ import React, { useState } from 'react';
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { IoSearchSharp, IoAddSharp, IoFilter } from "react-icons/io5";
 import { FaCar, FaHome, FaTshirt, FaCouch } from 'react-icons/fa';
-import { IoMdCloseCircle } from "react-icons/io";
-import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import HeaderFilterCard from '../headerFilterCard/HeaderFilterCard';
 import style from './navbar.module.css';
 import { FaBars } from "react-icons/fa";
-import { IoMdPerson } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
     const [selectedCity, setSelectedCity] = useState('');
     const [isModalOpen, setModalOpen] = useState(false);
-    const [isNawOpen, setNawOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isFilterCardOpen, setFilterCardOpen] = useState(false);
-    const navigate = useNavigate();
+const navigate = useNavigate();
 
     const cities = ['Bakı', 'Gəncə', 'Sumqayıt', 'Şəki', 'Lənkəran'];
 
@@ -30,13 +27,8 @@ const Navbar = () => {
     const handleCityChange = (event) => {
         setSelectedCity(event.target.value);
     };
-
     const openModal = () => setModalOpen(true);
-
-    const toggleNawBar = () => setNawOpen((prev) => !prev);
-
     const closeModal = () => setModalOpen(false);
-
     const toggleFilterCard = () => setFilterCardOpen((prev) => !prev);
 
     return (
@@ -50,7 +42,7 @@ const Navbar = () => {
                                 <BiSolidCategoryAlt /> Kategoriya
                             </div>
                             <div className={style.inputGroup}>
-                                <select value={selectedCity} onChange={handleCityChange}>
+                                <select value={selectedCity} onChange={handleCityChange} className={style.navBar_selectBox}>
                                     <option value="">--Şəhər seçin--</option>
                                     {cities.map((city, index) => (
                                         <option key={index} value={city}>{city}</option>
@@ -72,31 +64,10 @@ const Navbar = () => {
                                 <IoFilter /> Filter
                             </button>
                         </div>
-                        <FaBars className={style.bar_icon} onClick={toggleNawBar} />
+                        <FaBars className={style.bar_icon} onClick={()=>navigate('/headerBox')} />
                     </div>
                 </div>
             </nav>
-
-            {/* Responsive Navbar */}
-            <div className={`${style.nawBar_responsive_container} ${isNawOpen ? style.nawBar_responsive_displayBlock : style.nawBar_responsive_hide}`}>
-                <div className={style.nawBar_responsive}>
-                    <div className={style.nawBar_responsive_header}>
-                        <span>EasySaleApp</span>
-                        <IoMdCloseCircle className={style.nawBar_responsive_header_icon} onClick={toggleNawBar} />
-                    </div>
-                    <div className={style.nawBar_responsive_main}>
-                        <div className={style.nawBar_responsive_main_box} onClick={() => navigate('/logIn')}>
-                            <IoMdPerson /> Giris
-                        </div>
-                        <div className={style.nawBar_responsive_main_box}>
-                            <FaHeart /> Beyendiklerim
-                        </div>
-                        <div className={style.nawBar_responsive_main_box}>
-                            <FaCartShopping /> Paketler
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {isFilterCardOpen && <HeaderFilterCard isFilterCardOpen={isFilterCardOpen} />}
             {isModalOpen && (

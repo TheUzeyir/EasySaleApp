@@ -1,12 +1,18 @@
 import React from 'react'
 import style from "./aboutPage.module.css"
+import { useNavigate } from 'react-router-dom';
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+
 
 const Info = () => {
+  const navigate=useNavigate()
+
   return (
     <div className={style.Info_container}>
       <div className="container">
       <div className={style.aboutPage_main}>
         <h3 className={style.aboutPage_main_title}>Layihə haqqında</h3>
+        <p className={style.AboutPage_goBack} onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>
         <p className={style.aboutPage_main_subtitle}>RENTERMMC.COM lahiyəsi Azərbaycanda yalniz icarə üçün nəzərdə tutulmuş ümumi icarə platformasidir.</p>
         <p className={style.aboutPage_main_subtitle}>Hər bir istifadəçi RENTERMMC.COM saytindan istifadə etməklə 20 dən artiq kateqoriya üzrə məhsullari icariyə gotürə və axdara bilər.        </p>
         <p className={style.aboutPage_main_subtitle}>RENTERMMC.COM-da şirkətlər və fərdi sahibkarlarla yanaşi fərdi şəxslərdə öz məhsullarini yerləşdirə bilərlər.        </p>

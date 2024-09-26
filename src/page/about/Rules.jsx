@@ -1,11 +1,15 @@
 import React from 'react'
 import style from "./aboutPage.module.css"
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const Rules = () => {
+    const navigate=useNavigate()
   return (
     <div className={style.rules_container}>
         <div className='container'>
             <h3 className={style.rulesPage_title}>EasySaleApp QAYDALAR</h3>
+            <p className={style.AboutPage_goBack} onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>
         <section>
             <h4 className={style.rulesPage_subtitle}>Elanin yerlesidirlmesi</h4>
             <p className={style.rulesPage_text}>Bir ay(30gün) ərzində isdifadəçi saytin qaydalarina zidd olmayan katiqoriya və subkatiqoriyaya aid ödənişiz şəkildə yalniz bir əded elan paylaşa bilər.</p>

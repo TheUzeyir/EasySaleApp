@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from '../../layout/footer/Footer'
 import Header from '../../layout/Header/Header'
 import ProductCard from '../../components/productCard/ProductCard'
+import FooterResponsive from '../../layout/footer_responsive/FooterResponsive'
 
 const Main = () => {
   return (
@@ -11,6 +12,7 @@ const Main = () => {
       <ProductCard/>
       </div>
       <Footer/>
+      <FooterResponsive/>
     </div>
   )
 }
