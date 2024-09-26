@@ -7,6 +7,7 @@ import { BsShop } from "react-icons/bs";
 import { IoCalendarNumber } from "react-icons/io5";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import FooterResponsive from '../../layout/footer_responsive/FooterResponsive';
 
 const LikedPage = () => {
 
@@ -231,6 +232,7 @@ const LikedPage = () => {
         </div>
         </div>
         <Footer/>
+        <FooterResponsive/>
     </div>
   )
 }

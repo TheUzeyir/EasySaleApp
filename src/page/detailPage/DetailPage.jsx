@@ -6,6 +6,7 @@ import { MdDiamond, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate, useParams } from 'react-router-dom';
 import style from "./detailPage.module.css";
 import data from "../../data.json"; 
+import FooterResponsive from '../../layout/footer_responsive/FooterResponsive';
 
 const DetailPage = () => {
     const [openComplaintBox, setOpenComplaintBox] = useState(false);
@@ -46,7 +47,7 @@ const DetailPage = () => {
                         <div className={style.detailPage_main_head_left}>
                             <div className={style.detailPage_main_head_left_mainImgBox}>
                                 <img
-                                    src={mainImage || img}
+                                    src={mainImage || product.thumbnail}
                                     alt="Product"
                                     className={style.detailPage_main_head_left_mainImgBox_img}
                                 />
@@ -137,6 +138,7 @@ const DetailPage = () => {
                 </div>
             </div>
             <Footer />
+            <FooterResponsive/>
         </div>
     );
 };

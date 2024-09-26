@@ -9,6 +9,7 @@ import Contack from './Contack'
 import Info from "./Info"
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import FooterResponsive from '../../layout/footer_responsive/FooterResponsive'
 
 const AboutPage = () => {
   const [activeSection, setActiveSection] = useState('info'); 
@@ -73,6 +74,7 @@ const AboutPage = () => {
              {renderSection()}
         </div>
       <Footer/>
+      <FooterResponsive/>
     </div>
   )
 }
