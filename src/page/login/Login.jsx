@@ -10,7 +10,7 @@ const LogIn = () => {
         setRightPanelActive(true);
     };
 
-    const handleSignInClick = () => {
+    const handleSignInClick = () => { 
         setRightPanelActive(false);
     }; 
 
@@ -35,8 +35,6 @@ const LogIn = () => {
                         <button className="SignUp_icon">Sign Up</button>
                     </form>
                 </div>
-
-                {/* Sign In Form */}
                 <div className="form-container sign-in-container">
                     <form className="SignUp_form" action="#">
                         <h1 className="SignUp_title">Sign in</h1>

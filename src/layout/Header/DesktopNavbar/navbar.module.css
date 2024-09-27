@@ -10,7 +10,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+}
+
+.navbarBrand {
+  cursor: pointer;
 }
 
 .navbar_container {
@@ -227,6 +230,13 @@
   .advertsBox {
     display: none;
   }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
   .navbarBrand {
     font-size: 14px;
   }
@@ -235,15 +245,24 @@
     display: none;
   }
   .inputGroup {
-    margin-bottom: -150px;
-    margin-left: -40px;
+    margin-top: 10px;
     position: relative;
     width: 100%;
+    margin-left: -20px;
   }
   .searchInput {
     border: 1px solid gray;
     height: 40px;
     width: 100%;
+    background: transparent;
+  }
+  .searchInput::-moz-placeholder {
+    color: white;
+    font-size: 10px;
+  }
+  .searchInput::placeholder {
+    color: white;
+    font-size: 10px;
   }
   .searchBtn {
     position: absolute;
@@ -251,9 +270,7 @@
     background: white;
     padding: 0px;
     margin-top: 10px;
-  }
-  .icon {
-    color: black;
+    background: transparent;
   }
   .bar_icon {
     display: block;

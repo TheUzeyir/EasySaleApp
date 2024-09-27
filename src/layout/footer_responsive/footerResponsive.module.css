@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   border-top: 1px solid gray;
-  margin-top: 40px;
+  width: 100%;
 }
 
 .FooterResponsive {
@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
 }
 
 .FooterResponsive_box {
@@ -39,9 +38,28 @@
     display: none;
   }
 }
+@media screen and (max-width: 968px) {
+  .FooterResponsive_container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 54;
+    background: white;
+  }
+}
 @media screen and (max-width: 572px) {
+  .FooterResponsive_card {
+    flex-direction: column;
+    font-size: 20px;
+  }
   .FooterResponsive_box {
-    padding-left: 10px;
-    grid-template-columns: repeat(2, 1fr);
+    padding-right: -40px;
+  }
+  .FooterResponsive_card_text {
+    font-size: 10px;
+  }
+  .FooterResponsive_box {
+    margin-left: -60px;
   }
 }/*# sourceMappingURL=footerResponsive.module.css.map */

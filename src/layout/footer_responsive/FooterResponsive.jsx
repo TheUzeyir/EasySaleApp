@@ -23,10 +23,10 @@ const FooterResponsive = () => {
             <div className={style.FooterResponsive}>
                 <div className={style.FooterResponsive_card_addProduct}><FaCirclePlus/></div>
                 <div className={style.FooterResponsive_box}>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/')}><FaHome/>Ana Sehife</div>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/CategoryBox')}><BiSolidCategory/>Kateqoriyalar</div>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/likedPage')}><FaHeart/>Beyendiklerim</div>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/logIn')}><IoMdPerson/>Giris</div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/')}><FaHome/><span  className={style.FooterResponsive_card_text}>Ana Sehife</span></div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/CategoryBox')}><BiSolidCategory/><span className={style.FooterResponsive_card_text}>Kateqoriyalar</span></div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/likedPage')}><FaHeart/><span className={style.FooterResponsive_card_text}>Beyendiklerim</span></div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/logIn')}><IoMdPerson/><span className={style.FooterResponsive_card_text}>Giris</span></div>
                 </div>
             </div>
         </div>

@@ -24,25 +24,17 @@ export default function HeaderSliders() {
   navigation={true}
   modules={[Navigation]}
   breakpoints={{
-    0: {
-        slidesPerView: 2,
-        spaceBetween: 55,
+      0: {
+        slidesPerView: 2, 
+        spaceBetween: 60,
       },
-    460: {
-        slidesPerView: 2,
-        spaceBetween: 30,
-      },
-    473: {
-        slidesPerView: 3,
-        spaceBetween: 55,
+      574: {
+        slidesPerView: 3, 
+        spaceBetween: 60,
       },
       768: {
-        slidesPerView: 4,
-        spaceBetween: 80,
-      },
-      993: {
-        slidesPerView: 5, 
-        spaceBetween: 40,
+        slidesPerView: 4, 
+        spaceBetween: 60,
       },
       1080: {
         slidesPerView: 6, 
