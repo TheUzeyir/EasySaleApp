@@ -91,6 +91,7 @@
 @media screen and (max-width: 968px) {
   .productCard_container {
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
   .productCard_imgBox_title {
     font-size: 14px;
@@ -99,5 +100,8 @@
 @media screen and (max-width: 596px) {
   .productCard_container {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .productCard_imgBox_img {
+    height: 150px;
   }
 }/*# sourceMappingURL=likedPage.module.css.map */

@@ -43,7 +43,7 @@ const CategoryBox = () => {
                                 ))}
                             </div>
                         )}
-                    </div>
+                    </div> 
                 ))}
             </div>
         </div>

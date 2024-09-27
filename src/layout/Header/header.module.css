@@ -32,6 +32,10 @@
   margin-right: 5px;
 }
 
+.headerTop_container_right {
+  color: white;
+}
+
 @media screen and (max-width: 968px) {
   .headerTop {
     display: none;

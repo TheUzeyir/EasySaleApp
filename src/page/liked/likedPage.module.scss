@@ -21,7 +21,7 @@
 .productCard_imgBox{
 
     position: relative;
-}
+} 
 
 .productCard_imgBox_img{
     width: 100%;
@@ -90,6 +90,7 @@ cursor: pointer;
 @media screen and (max-width:968px) {
     .productCard_container{
         grid-template-columns: repeat(3,1fr);
+        gap: 10px;
     }
 
     .productCard_imgBox_title{
@@ -99,5 +100,9 @@ cursor: pointer;
 @media screen and (max-width:596px) {
     .productCard_container{
         grid-template-columns: repeat(2,1fr);
+    }
+
+    .productCard_imgBox_img{
+        height: 150px;
     }
 }

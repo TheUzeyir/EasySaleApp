@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const TermCondition = () => {
+  const navigate=useNavigate()
   return (
     <div className={style.TermCondition_container}>
       <div className='container'>

@@ -11,7 +11,7 @@ const ProductCard = () => {
     <div className="container">
         <div className={style.productCard_container}>
             {
-                data.map((item)=>                
+                data.map((item)=>                 
                 <div className={style.productCard} key={item.id}>
                     <Link to={`/product-details/${item.id}`} >                    
                         <div className={style.productCard_imgBox}>
