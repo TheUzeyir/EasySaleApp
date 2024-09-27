@@ -4,6 +4,7 @@ import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import style from "./headerNavBox.module.css"
+import { FaEarthOceania } from "react-icons/fa6";
 
 
 const HeaderNavBox = () => {
@@ -25,6 +26,11 @@ const navigate = useNavigate();
             <div className={style.nawBar_responsive_main_box}>
                 <FaCartShopping /> Paketler
             </div>
+            <p className={style.emptyBox}></p>
+            <div className={style.nawBar_langBox}><FaEarthOceania/>Dil</div>
+            <div>Az</div>
+            <div>Rus</div>
+            <div>En</div>
             <p className={style.emptyBox}></p>
             <div className={style.nawBar_responsive_main_box} onClick={()=>navigate('/info')}>Hakkimizda</div>
             <div className={style.nawBar_responsive_main_box} onClick={()=>navigate('/contack')}>Bizimle Elaqe</div>

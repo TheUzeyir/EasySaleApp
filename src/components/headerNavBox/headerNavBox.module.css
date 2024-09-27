@@ -39,4 +39,9 @@
 
 .nawBar_responsive_main_box:hover {
   color: blue;
+}
+
+.nawBar_langBox {
+  display: flex;
+  gap: 10px;
 }/*# sourceMappingURL=headerNavBox.module.css.map */

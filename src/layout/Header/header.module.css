@@ -12,6 +12,18 @@
   cursor: pointer;
 }
 
+.headerTop_container_right_langBox {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+}
+
+.headerTop_container_right_langBox_item {
+  color: black;
+}
+
 .headerSlider {
   align-items: center;
 }
