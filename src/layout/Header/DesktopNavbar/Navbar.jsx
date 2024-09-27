@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { IoSearchSharp, IoAddSharp, IoFilter } from "react-icons/io5";
 import { FaCar, FaHome, FaTshirt, FaCouch } from 'react-icons/fa';
@@ -6,6 +6,7 @@ import HeaderFilterCard from '../headerFilterCard/HeaderFilterCard';
 import style from './navbar.module.css';
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import data from "../../../data.json"
 
 
 const Navbar = () => {
@@ -13,7 +14,9 @@ const Navbar = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isFilterCardOpen, setFilterCardOpen] = useState(false);
-const navigate = useNavigate();
+    const [input, setInput] = useState(""); 
+    const [filterData, setFilterData] = useState([]);
+    const navigate = useNavigate();
 
     const cities = ['Bakı', 'Gəncə', 'Sumqayıt', 'Şəki', 'Lənkəran'];
 
@@ -30,6 +33,14 @@ const navigate = useNavigate();
     const openModal = () => setModalOpen(true);
     const closeModal = () => setModalOpen(false);
     const toggleFilterCard = () => setFilterCardOpen((prev) => !prev);
+    useEffect(() => {
+        if (input.trim() !== "") {
+            const filtered = data.filter((item) => item.title.toLowerCase().includes(input.trim().toLowerCase()));
+            setFilterData(filtered);
+        } else {
+            setFilterData([]);
+        }
+    }, [input]);    
 
     return (
         <>
@@ -52,6 +63,8 @@ const navigate = useNavigate();
                                     placeholder="Əşya və ya xidmət axtarışı"
                                     type="text"
                                     className={style.searchInput}
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
                                 />
                                 <button className={style.searchBtn}>
                                     <IoSearchSharp className={style.icon} />
