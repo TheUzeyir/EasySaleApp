@@ -72,7 +72,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className={style.advertsBox}>
-                            <button className={style.advertsBox_btn_new}><IoAddSharp /> Yeni Elan</button>
+                            <button className={style.advertsBox_btn_new}onClick={()=>navigate('/yeniElan')}><IoAddSharp /> Yeni Elan</button>
                             <button className={style.advertsBox_btn_filter} onClick={toggleFilterCard}>
                                 <IoFilter /> Filter
                             </button>

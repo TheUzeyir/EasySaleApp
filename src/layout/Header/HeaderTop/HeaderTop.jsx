@@ -14,8 +14,8 @@ export default function HeaderTop() {
               <div className={style.contactNum}>Dəstək: (077) 613-59-59</div>
            </div>
            <div className={style.headerTop_container_right}>
-                <a onClick={()=>navigate("/likedPage")}><FaRegHeart className={style.headerTop_container_right_icon}/><span>Sevimlilər</span> </a>
-                <a onClick={()=>navigate("/logIn")}><FaUser className={style.headerTop_container_right_icon}/><span>Giriş</span></a>
+                <a className={style.headerTop_container_right_item} onClick={()=>navigate("/likedPage")}><FaRegHeart className={style.headerTop_container_right_icon}/><span>Sevimlilər</span> </a>
+                <a className={style.headerTop_container_right_item} onClick={()=>navigate("/logIn")}><FaUser className={style.headerTop_container_right_icon}/><span>Giriş</span></a>
            </div>
          </div>
       </div>

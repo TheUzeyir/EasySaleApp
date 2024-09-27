@@ -11,6 +11,7 @@ import LikedPage from './page/liked/LikedPage'
 import LogIn from './page/login/Login'
 import Main from './page/main/Main'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
+import NewProductAdd from './page/newProductAdd/NewProductAdd'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
       <Route path='/logIn' element={<LogIn/>}/>
       <Route path='/categoryBox' element={<CategoryBox/>}/>
       <Route path='/headerBox' element={<HeaderNavBox/>}/>
+      <Route path='/yeniElan' element={<NewProductAdd/>}/>
     </Routes>
     </BrowserRouter>
     </>

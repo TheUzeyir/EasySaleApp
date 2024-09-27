@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
-import Header from '../../layout/Header/Header'
 import Footer from '../../layout/footer/Footer'
 import FooterResponsive from '../../layout/footer_responsive/FooterResponsive'
 import style from "./newProductAdd.module.css"
+import HeaderTop from '../../layout/Header/HeaderTop/HeaderTop'
 
 const NewProductAdd = () => {
     const [selectedCity, setSelectedCity] = useState('');
@@ -13,7 +13,7 @@ const NewProductAdd = () => {
 
   return (
     <div className={style.addBox_main_container}>
-      <Header/>
+      <HeaderTop/>
       <div className="container">
         <div className={style.addBox_container}>
             <p className={style.addBox_title}>Yeni elan</p>

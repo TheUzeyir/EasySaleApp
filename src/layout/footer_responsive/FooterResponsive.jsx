@@ -21,7 +21,7 @@ const FooterResponsive = () => {
     <div className={style.FooterResponsive_container}>
         <div className="container">
             <div className={style.FooterResponsive}>
-                <div className={style.FooterResponsive_card_addProduct}><FaCirclePlus/></div>
+                <div className={style.FooterResponsive_card_addProduct} onClick={()=>navigate('/yeniElan')}><FaCirclePlus/></div>
                 <div className={style.FooterResponsive_box}>
                     <div className={style.FooterResponsive_card} onClick={()=>navigate('/')}><FaHome/><span  className={style.FooterResponsive_card_text}>Ana Sehife</span></div>
                     <div className={style.FooterResponsive_card} onClick={()=>navigate('/CategoryBox')}><BiSolidCategory/><span className={style.FooterResponsive_card_text}>Kateqoriyalar</span></div>
