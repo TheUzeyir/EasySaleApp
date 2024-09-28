@@ -8,15 +8,17 @@ import { IoCalendarNumber } from "react-icons/io5";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import FooterResponsive from '../../layout/footer_responsive/FooterResponsive';
-import data from "../../data.json";
+import data from "../../data.json"; // Assuming this is your main product data
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addLikedProduct } from '../../redux/likedSlice';
+import { addLikedProduct } from '../../redux/likedSlice'; // Assuming you already have this slice
+
 
 const LikedPage = () => {
     const navigate = useNavigate();
     const [likedProducts, setLikedProducts] = useState([]);
     const dispatch = useDispatch();
+
     useEffect(() => {
         const likedProductsFromStorage = localStorage.getItem('likedProducts');
         if (likedProductsFromStorage) {
@@ -58,7 +60,7 @@ const LikedPage = () => {
                                                 <img src={item.thumbnail} alt="" className={style.productCard_imgBox_img} />
                                                 <FaHeart 
                                                     className={style.productCard_imgBox_heartIcon}
-                                                    onClick={() => toggleLiked(item)}
+                                                    onClick={() => toggleLiked(item)} // Allow toggling like status
                                                 />
                                                 <div className={style.productCard_imgBox_title}><BsShop /> Magaza</div>
                                             </div>
