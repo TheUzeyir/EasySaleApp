@@ -27,7 +27,15 @@
   position: absolute;
   right: 10px;
   top: 10px;
-  color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.productCard_imgBox_heartIcon_check {
+  color: red;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   cursor: pointer;
 }
 
