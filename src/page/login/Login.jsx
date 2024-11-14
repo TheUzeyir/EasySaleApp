@@ -44,14 +44,17 @@ const LogIn = () => {
                             <a href="#" className="SignUps_linkText"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span className="SignUp_subtitle">or use your account</span>
+                        <input className='SignUp_input' type="email" placeholder="Name" />
+                        <input className='SignUp_input' type="email" placeholder="FirstName" />
+                        <input className='SignUp_input' type="email" placeholder="LastName" />
+                        <input className='SignUp_input' type="email" placeholder="Phone" />
                         <input className='SignUp_input' type="email" placeholder="Email" />
                         <input className='SignUp_input' type="password" placeholder="Password" />
+                        <input className='SignUp_input' type="password" placeholder="Confirm Password" />
                         <a href="#" className='SignUps_linkText'>Forgot your password?</a>
                         <button className="SignUp_icon">Sign In</button>
                     </form>
                 </div>
-
-                {/* Overlay */}
                 <div className="overlay-container">
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
@@ -67,6 +70,7 @@ const LogIn = () => {
                     </div>
                 </div>
             </div>
+            <p></p>
         </div>
     );
 };
