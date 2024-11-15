@@ -1,78 +1,80 @@
-import React, { useState } from 'react';
-import './login.css';
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import emailIcon from "../../img/email.svg";
+import passwordIcon from "../../img/password.svg";
+import styles from "./SignUp.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { notify } from "./toast";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const LogIn = () => {
-    const [isRightPanelActive, setRightPanelActive] = useState(false);
+const Login = () => {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const handleSignUpClick = () => {
-        setRightPanelActive(true);
-    };
+  const [touched, setTouched] = useState({});
 
-    const handleSignInClick = () => { 
-        setRightPanelActive(false);
-    }; 
+  const chaeckData = (obj) => {
+    const { email, password } = obj;
+    const urlApi = `https://lightem.senatorhost.com/login-react/index.php?email=${email.toLowerCase()}&password=${password}`;
+    const api = axios
+      .get(urlApi)
+      .then((response) => response.data)
+      .then((data) => (data.ok ? notify("You login to your account successfully", "success") : notify("Your password or your email is wrong", "error")));
+    toast.promise(api, {
+      pending: "Loading your data...",
+      success: false,
+      error: "Something went wrong!",
+    });
+  };
 
-    const navigate=useNavigate()
+  const changeHandler = (event) => {
+    if (event.target.name === "IsAccepted") {
+      setData({ ...data, [event.target.name]: event.target.checked });
+    } else {
+      setData({ ...data, [event.target.name]: event.target.value });
+    }
+  };
 
-    return (
-        <div className="SignUp">
-            <p className='SignUp_goBack' onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>
-            <div className={`containers ${isRightPanelActive ? 'right-panel-active' : ''}`} id="container">
-                <div className="form-container sign-up-container">
-                    <form className="SignUp_form" action="#">
-                        <h1 className="SignUp_title">Create Account</h1>
-                        <div className="social-container">
-                            <a href="#" className="SignUps_linkText"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#" className="SignUps_linkText"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="SignUps_linkText"><i className="fab fa-linkedin-in"></i></a>
-                        </div>
-                        <span className="SignUp_subtitle">or use your email for registration</span>
-                        <input className='SignUp_input' type="text" placeholder="Name" />
-                        <input className='SignUp_input' type="email" placeholder="Email" />
-                        <input className='SignUp_input' type="password" placeholder="Password" />
-                        <button className="SignUp_icon">Sign Up</button>
-                    </form>
-                </div>
-                <div className="form-container sign-in-container">
-                    <form className="SignUp_form" action="#">
-                        <h1 className="SignUp_title">Sign in</h1>
-                        <div className="social-container">
-                            <a href="#" className="SignUps_linkText"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#" className="SignUps_linkText"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="SignUps_linkText"><i className="fab fa-linkedin-in"></i></a>
-                        </div>
-                        <span className="SignUp_subtitle">or use your account</span>
-                        <input className='SignUp_input' type="email" placeholder="Name" />
-                        <input className='SignUp_input' type="email" placeholder="FirstName" />
-                        <input className='SignUp_input' type="email" placeholder="LastName" />
-                        <input className='SignUp_input' type="email" placeholder="Phone" />
-                        <input className='SignUp_input' type="email" placeholder="Email" />
-                        <input className='SignUp_input' type="password" placeholder="Password" />
-                        <input className='SignUp_input' type="password" placeholder="Confirm Password" />
-                        <a href="#" className='SignUps_linkText'>Forgot your password?</a>
-                        <button className="SignUp_icon">Sign In</button>
-                    </form>
-                </div>
-                <div className="overlay-container">
-                    <div className="overlay">
-                        <div className="overlay-panel overlay-left">
-                            <h1 className="SignUp_title">Welcome Back!</h1>
-                            <p className="SignUp_text">To keep connected with us please login with your personal info</p>
-                            <button className="btn_ghost" onClick={handleSignInClick} id="signIn">Sign In</button>
-                        </div>
-                        <div className="overlay-panel overlay-right">
-                            <h1 className="SignUp_title">Hello, Friend!</h1>
-                            <p className="SignUp_text">Enter your personal details and start your journey with us</p>
-                            <button className="btn_ghost" onClick={handleSignUpClick} id="signUp">Sign Up</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p></p>
+  const focusHandler = (event) => {
+    setTouched({ ...touched, [event.target.name]: true });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    chaeckData(data);
+  };
+
+  return (
+    <div className={styles.container}>
+      <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
+        <h2>Sign In</h2>
+        <div>
+          <div>
+            <input type="text" name="email" value={data.email} placeholder="E-mail" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
+            <img src={emailIcon} alt="" />
+          </div>
         </div>
-    );
+        <div>
+          <div>
+            <input type="password" name="password" value={data.password} placeholder="Password" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
+            <img src={passwordIcon} alt="" />
+          </div>
+        </div>
+
+        <div>
+          <button type="submit">Login</button>
+          <span style={{ color: "#a29494", textAlign: "center", display: "inline-block", width: "100%" }}>
+            Don't have a account? <Link to="/signup">Create account</Link>
+          </span>
+        </div>
+      </form>
+      <ToastContainer />
+    </div>
+  );
 };
 
-export default LogIn;
+export default Login;
