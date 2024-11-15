@@ -92,7 +92,7 @@
 
 }
 
-.category-modal {
+.modalCategoryModal {
     position: fixed;
     top: 0;
     left: 0;
@@ -115,8 +115,12 @@
     }
 }
 
-.category-modal .modal-content {
-    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+.modalBody {
+    display: flex;
+}
+
+.modalContent {
+    background-image: radial-gradient(circle, #2A2036 5%, #4dabf7 95%);
     width: 60%;
     max-width: 900px;
     height: 80%;
@@ -125,7 +129,6 @@
     padding: 20px;
     transform: scale(0.8);
     animation: scaleIn 0.3s ease-in-out forwards;
-    overflow-y: auto;
 }
 
 @keyframes scaleIn {
@@ -137,61 +140,60 @@
     }
 }
 
-.category-modal .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-.category-modal .modal-header h5 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.category-modal .modal-body {
+.modalBody{
     display: flex;
     padding-top: 15px;
     height: 100%;
 }
 
-.category-modal .categories {
+.categories {
     border-right: 1px solid #ddd;
     max-height: 100%;
     overflow-y: auto;
+    color: white;
 }
 
-.category-modal .categories .category-item {
+.categoryItem{
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    background: #2A3036;
+    border-radius: 4px;
+    margin-bottom: 5px;
 }
 
-.category-modal .categories .category-item:hover {
-    background-color: #f7f7f7;
-    border-radius: 10px;
+.categoryItem:hover {
+    background-color: #fff;
+    color: #2A2036;
 }
 
-.category-modal .products {
+.products {
     width: 70%;
     padding-left: 20px;
     max-height: 100%;
     overflow-y: auto;
 }
 
-.category-modal .products ul {
+.products_ul {
     list-style-type: none;
     padding: 0;
 }
 
-.category-modal .products li {
+.products_li{
     padding: 5px 0;
     font-size: 1.2rem;
+    border-bottom: 1px solid gray;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+.products_li:hover{
+   color: lightgreen;
 }
 
-.category-modal button {
+.modalContent_btn {
     background-color: #2A2036;
     border: none;
     color: white;
@@ -201,11 +203,12 @@
     transition: background-color 0.3s ease;
 }
 
-.category-modal button:hover {
-    background-color: #2A3036;
+.modalContent_btn:hover {
+    background-color: white;
+    color: #2A2036;
 }
 
-.category-item {
+.categoryItem{
     display: flex;
     align-items: center;
     padding: 10px;
@@ -213,7 +216,7 @@
     transition: background-color 0.3s ease;
 }
 
-.category-item .category-icon {
+.categoryIcon {
     margin-right: 10px;
     font-size: 1.5rem;
 } 

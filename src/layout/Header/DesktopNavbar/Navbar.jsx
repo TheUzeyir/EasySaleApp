@@ -7,6 +7,7 @@ import style from './navbar.module.css';
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import data from "../../../data.json"
+import { IoIosArrowForward } from "react-icons/io";
 
 
 const Navbar = () => {
@@ -84,27 +85,27 @@ const Navbar = () => {
 
             {isFilterCardOpen && <HeaderFilterCard isFilterCardOpen={isFilterCardOpen} />}
             {isModalOpen && (
-                <div className="modal category-modal">
-                    <div className="modal-content">
-                        <button onClick={closeModal}>X</button>
-                        <div className="modal-body d-flex">
-                            <div className="categories">
+                <div className={style.modalCategoryModal}>
+                    <div className={style.modalContent}>
+                        <button onClick={closeModal} className={style.modalContent_btn}>X</button>
+                        <div className={style.modalBody}>
+                            <div className={style.categories}>
                                 {categories.map((category, index) => (
                                     <div
                                         key={index}
                                         onMouseEnter={() => setSelectedCategory(category)}
-                                        className="category-item"
+                                        className={style.categoryItem}
                                     >
-                                        <span className="category-icon">{category.icon}</span>
+                                        <span className={style.categoryIcon}>{category.icon}</span>
                                         {category.name}
                                     </div>
                                 ))}
                             </div>
-                            <div className="products">
+                            <div className={style.products}>
                                 {selectedCategory ? (
-                                    <ul>
+                                    <ul className={style.products_ul}>
                                         {selectedCategory.products.map((product, index) => (
-                                            <li key={index}>{product}</li>
+                                            <li className={style.products_li} key={index}>{product} <IoIosArrowForward/></li>
                                         ))}
                                     </ul>
                                 ) : (
