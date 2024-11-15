@@ -8,6 +8,7 @@ import { notify } from "./toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import "react-toastify/dist/ReactToastify.min.css";
 
 const Login = () => {
   const [data, setData] = useState({
