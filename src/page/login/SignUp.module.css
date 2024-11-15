@@ -181,6 +181,11 @@
   margin: 19px 0;
 }
 
+.Input {
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
 @media (max-width: 568px) {
   .formLogin {
     min-width: 300px;

@@ -7,8 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { notify } from "./toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import "react-toastify/dist/ReactToastify.min.css";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -54,14 +52,14 @@ const Login = () => {
       <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
         <h2>Sign In</h2>
         <div>
-          <div>
+          <div className={styles.Input}>
             <input type="text" name="email" value={data.email} placeholder="E-mail" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
             <img src={emailIcon} alt="" />
           </div>
         </div>
         <div>
-          <div>
-            <input type="password" name="password" value={data.password} placeholder="Password" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
+          <div className={styles.Input}>
+            <input  type="password" name="password" value={data.password} placeholder="Password" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
             <img src={passwordIcon} alt="" />
           </div>
         </div>
