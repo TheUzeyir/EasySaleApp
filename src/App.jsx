@@ -8,10 +8,10 @@ import Rules from './page/about/Rules'
 import TermCondition from './page/about/TermCondition'
 import DetailPage from './page/detailPage/DetailPage'
 import LikedPage from './page/liked/LikedPage'
-import LogIn from './page/login/Login'
 import Main from './page/main/Main'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import NewProductAdd from './page/newProductAdd/NewProductAdd'
+import LogIn from './page/login/Login'
 
 function App() {
 
@@ -28,7 +28,7 @@ function App() {
       <Route path='/contack' element={<Contack/>}/>
       <Route path='/product-details/:id' element={<DetailPage/>}/>
       <Route path='/likedPage' element={<LikedPage/>}/>
-      <Route path='/logIn' element={<LogIn/>}/>
+      <Route path='/login' element={<LogIn/>}/>
       <Route path='/categoryBox' element={<CategoryBox/>}/>
       <Route path='/headerBox' element={<HeaderNavBox/>}/>
       <Route path='/yeniElan' element={<NewProductAdd/>}/>
