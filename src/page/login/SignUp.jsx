@@ -6,14 +6,15 @@ import { validate } from "./validate";
 import styles from "./SignUp.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { notify } from "./toast";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const SignUp = () => {
   const [data, setData] = useState({
     name: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -39,28 +40,51 @@ const SignUp = () => {
     setTouched({ ...touched, [event.target.name]: true });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
+
     if (!Object.keys(errors).length) {
-      const urlApi = `https://lightem.senatorhost.com/login-react/index.php?email=${data.email.toLowerCase()}&password=${data.password}&register=true`;
-      const pushData = async () => {
-        const responseA = axios.get(urlApi);
-        const response = await toast.promise(responseA, {
-          pending: "Check your data",
-          success: "Checked!",
-          error: "Something went wrong!",
-        });
-        if (response.data.ok) {
-          notify("You signed Up successfully", "success");
-        } else {
-          notify("You have already registered, log in to your account", "warning");
-        }
+      const apiUrl = "http://restartbaku-001-site3.htempurl.com/api/auth/user-register";
+      const payload = {
+        userName: data.name,
+        userFirstName: data.firstName,
+        userLastName: data.lastName,
+        userPhone: data.phone,
+        userEmail: data.email,
+        userPassword: data.password,
+        confirmPassword: data.confirmPassword,
       };
-      pushData();
+
+      try {
+        const response = await toast.promise(
+          axios.post(apiUrl, payload),
+          {
+            pending: "Submitting your data...",
+            success: "Registration successful!",
+            error: "Registration failed!",
+          }
+        );
+
+        if (response.status === 200 || response.status === 201) {
+          toast.success("You signed up successfully");
+        } else {
+          toast.warning("Unexpected error occurred");
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          toast.error("Username or email already exists. Please choose a different one.");
+        } else {
+          toast.error("Registration failed. Please try again later.");
+        }
+        console.error("Error:", error);
+      }
     } else {
-      notify("Please Check fileds again", "error");
+      toast.error("Please check the fields again");
       setTouched({
         name: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
         email: true,
         password: true,
         confirmPassword: true,
@@ -69,52 +93,107 @@ const SignUp = () => {
     }
   };
 
+  const sendDataToAPI = async () => {
+    const apiUrl = "http://restartbaku-001-site3.htempurl.com/api/auth/user-register";
+    const payload = {
+      userName: data.name,
+      userFirstName: data.firstName,
+      userLastName: data.lastName,
+      userPhone: data.phone,
+      userEmail: data.email,
+      userPassword: data.password,
+      confirmPassword: data.confirmPassword,
+    };
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST", // POST isteği yapılacak
+        headers: {
+          "Content-Type": "application/json", // JSON formatında veri gönderiyoruz
+        },
+        body: JSON.stringify(payload), // Payload'ı JSON formatında gönderiyoruz
+      });
+
+      if (response.ok) { // Eğer yanıt başarılıysa
+        const responseData = await response.json();
+        toast.success("Data successfully sent to the API!");
+      } else if (response.status === 409) {
+        toast.error("Username or email already exists. Please choose a different one.");
+      } else {
+        toast.warning("Unexpected response from the API.");
+      }
+    } catch (error) {
+      toast.error("Failed to send data to the API.");
+      console.error("API Error:", error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
         <h2>Sign Up</h2>
-        <div>
-          <div className={errors.name && touched.name ? styles.unCompleted : !errors.name && touched.name ? styles.completed : undefined}>
-            <input type="text" name="name" value={data.name} placeholder="Name" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
-            <img src={userIcon} alt="" />
+        {[ 
+          { name: "name", placeholder: "Username", icon: userIcon },
+          { name: "firstName", placeholder: "First Name", icon: userIcon },
+          { name: "lastName", placeholder: "Last Name", icon: userIcon },
+          { name: "phone", placeholder: "Phone", icon: userIcon },
+          { name: "email", placeholder: "E-mail", icon: emailIcon },
+          { name: "password", placeholder: "Password", icon: passwordIcon },
+          { name: "confirmPassword", placeholder: "Confirm Password", icon: passwordIcon },
+        ].map((input, index) => (
+          <div key={index}>
+            <div
+              className={
+                errors[input.name] && touched[input.name]
+                  ? styles.unCompleted
+                  : !errors[input.name] && touched[input.name]
+                  ? styles.completed
+                  : undefined
+              }
+            >
+              <input
+                type={input.name.includes("password") ? "password" : "text"}
+                name={input.name}
+                value={data[input.name]}
+                placeholder={input.placeholder}
+                onChange={changeHandler}
+                onFocus={focusHandler}
+                autoComplete="off"
+              />
+              <img src={input.icon} alt="" />
+            </div>
+            {errors[input.name] && touched[input.name] && (
+              <span className={styles.error}>{errors[input.name]}</span>
+            )}
           </div>
-          {errors.name && touched.name && <span className={styles.error}>{errors.name}</span>}
-        </div>
-        <div>
-          <div className={errors.email && touched.email ? styles.unCompleted : !errors.email && touched.email ? styles.completed : undefined}>
-            <input type="text" name="email" value={data.email} placeholder="E-mail" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
-            <img src={emailIcon} alt="" />
-          </div>
-          {errors.email && touched.email && <span className={styles.error}>{errors.email}</span>}
-        </div>
-        <div>
-          <div className={errors.password && touched.password ? styles.unCompleted : !errors.password && touched.password ? styles.completed : undefined}>
-            <input type="password" name="password" value={data.password} placeholder="Password" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
-            <img src={passwordIcon} alt="" />
-          </div>
-          {errors.password && touched.password && <span className={styles.error}>{errors.password}</span>}
-        </div>
-        <div>
-          <div className={errors.confirmPassword && touched.confirmPassword ? styles.unCompleted : !errors.confirmPassword && touched.confirmPassword ? styles.completed : !errors.confirmPassword && touched.confirmPassword ? styles.completed : undefined}>
-            <input type="password" name="confirmPassword" value={data.confirmPassword} placeholder="Confirm Password" onChange={changeHandler} onFocus={focusHandler} autoComplete="off" />
-            <img src={passwordIcon} alt="" />
-          </div>
-          {errors.confirmPassword && touched.confirmPassword && <span className={styles.error}>{errors.confirmPassword}</span>}
-        </div>
+        ))}
         <div>
           <div className={styles.terms}>
-            <input type="checkbox" name="IsAccepted" value={data.IsAccepted} id="accept" onChange={changeHandler} onFocus={focusHandler} />
-            <label htmlFor="accept">I accept terms of privacy policy</label>
+            <input
+              type="checkbox"
+              name="IsAccepted"
+              checked={data.IsAccepted}
+              onChange={changeHandler}
+              onFocus={focusHandler}
+            />
+            <label htmlFor="IsAccepted">I accept terms of privacy policy</label>
           </div>
-          {errors.IsAccepted && touched.IsAccepted && <span className={styles.error}>{errors.IsAccepted}</span>}
+          {errors.IsAccepted && touched.IsAccepted && (
+            <span className={styles.error}>{errors.IsAccepted}</span>
+          )}
         </div>
         <div>
           <button type="submit">Create Account</button>
-          <span style={{ color: "#a29494", textAlign: "center", display: "inline-block", width: "100%" }}>
-            Already have a account? <Link to="/login">Sign In</Link>
+          <span>
+            Already have an account? <Link to="/login">Sign In</Link>
           </span>
         </div>
       </form>
+      <div className={styles.apiButtonContainer}>
+        <button className={styles.apiButton} onClick={sendDataToAPI}>
+          Send Data to API
+        </button>
+      </div>
       <ToastContainer />
     </div>
   );
