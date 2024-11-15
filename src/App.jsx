@@ -13,7 +13,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NewProductAdd from './page/newProductAdd/NewProductAdd'
 import LogIn from './page/login/Login'
 import SignUp from './page/login/SignUp'
-import CategoryModal from './layout/Header/CategoryModal/CategoryModal'
 
 function App() {
   return (
@@ -33,7 +32,6 @@ function App() {
         <Route path='/categoryBox' element={<CategoryBox />} />
         <Route path='/headerBox' element={<HeaderNavBox />} />
         <Route path='/yeniElan' element={<NewProductAdd />} />
-        <Route path='/s' element={<CategoryModal />} />
       </Routes>
     </Router>
   )

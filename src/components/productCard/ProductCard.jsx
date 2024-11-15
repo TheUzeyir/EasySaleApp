@@ -37,6 +37,7 @@ const ProductCard = () => {
             <div className={style.productCard_container}>
                 {data.map((item) => (
                     <div className={style.productCard} key={item.id}>
+                        <Link to={`/product-details/${item.id}`}>
                         <div className={style.productCard_imgBox}>
                             <img src={item.thumbnail} alt={item.title} className={style.productCard_imgBox_img} />
                             {likedProducts.some((likedProduct) => likedProduct.id === item.id) ? (
@@ -54,7 +55,6 @@ const ProductCard = () => {
                                 <BsShop /> Magaza
                             </div>
                         </div>
-                        <Link to={`/product-details/${item.id}`}>
                             <div className={style.productCard_title}>
                                 <span className={style.productCard_title_price}>{item.price} AZN</span>
                                 <div className={style.productCard_title_dayBox}>

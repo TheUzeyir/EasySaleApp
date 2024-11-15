@@ -4,14 +4,16 @@ import passwordIcon from "../../img/password.svg";
 import styles from "./SignUp.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import backImg from "../../img/loginImg.png"
 
 const Login = () => {
   const [data, setData] = useState({
     userName: "", // Changed from email to userName
     password: "",
   });
+  const navigate=useNavigate()
 
   const [touched, setTouched] = useState({});
 
@@ -64,20 +66,17 @@ const Login = () => {
   const focusHandler = (event) => {
     setTouched({ ...touched, [event.target.name]: true });
   };
-
-  // Formu gönderme
   const submitHandler = (event) => {
     event.preventDefault();
     checkData(data); // Veriyi API'ye gönder
   };
-
-  // Manuel buton ile sorgu gönderme
   const handleButtonClick = () => {
     checkData(data); // Veriyi API'ye gönder
   };
 
   return (
     <div className={styles.container}>
+      <div className={styles.formContainer}>
       <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
         <h2>Sign In</h2>
         <div>
@@ -110,21 +109,18 @@ const Login = () => {
         </div>
 
         <div>
-          <button type="submit">Login</button>
-          <span style={{ color: "#a29494", textAlign: "center", display: "inline-block", width: "100%" }}>
+          <button onClick={()=>navigate('/signup')} className={styles.loginNavigateBtn} type="submit">Login</button>
+          <span style={{ color: "red", textAlign: "center", display: "inline-block", width: "100%" }}>
             Don't have an account? <Link to="/signup">Create account</Link>
           </span>
         </div>
       </form>
-
-      {/* Manual Button */}
-      <div>
-        <button type="button" onClick={handleButtonClick}>
+        <button type="button" onClick={handleButtonClick} className={styles.loginBtn}>
           Send Data to API
         </button>
-      </div>
-
       <ToastContainer />
+      </div>
+      <img src={backImg} alt={backImg} className={styles.LoginSignUpBackImg}/>
     </div>
   );
 };

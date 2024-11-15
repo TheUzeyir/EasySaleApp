@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import backImg from "../../img/loginImg.png"
+
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -130,6 +132,7 @@ const SignUp = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.formContainer}>
       <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
         <h2>Sign Up</h2>
         {[ 
@@ -183,18 +186,16 @@ const SignUp = () => {
           )}
         </div>
         <div>
-          <button type="submit">Create Account</button>
-          <span>
-            Already have an account? <Link to="/login">Sign In</Link>
-          </span>
+          <span type="submit">Create Account</span>
+          <span>Already have an account? <Link to="/login">Sign In</Link></span>
         </div>
       </form>
-      <div className={styles.apiButtonContainer}>
-        <button className={styles.apiButton} onClick={sendDataToAPI}>
+        <button className={styles.loginBtn} onClick={sendDataToAPI} >
           Send Data to API
         </button>
-      </div>
       <ToastContainer />
+      </div>
+      <img src={backImg} alt={backImg} className={styles.LoginSignUpBackImg}/>
     </div>
   );
 };
