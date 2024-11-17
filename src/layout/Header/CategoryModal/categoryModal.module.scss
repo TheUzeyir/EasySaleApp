@@ -26,7 +26,7 @@
 }
 
 .modalContent {
-    background-image: radial-gradient(circle, #2A2036 5%, #4dabf7 95%);
+background: linear-gradient(145deg, #ffffffe1, #f0f0f0);
     width: 60%;
     max-width: 900px;
     height: 80%;
@@ -69,8 +69,9 @@
 }
 
 .categoryItem:hover {
-    background-color: #fff;
     color: #2A2036;
+    border:1px solid #2A2036;
+    background: transparent;
 }
 
 .products {
@@ -88,15 +89,15 @@
 .products_li{
     padding: 5px 0;
     font-size: 1.2rem;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #2A2036;
     width: max-content;
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: #2A2036;
 }
 .products_li:hover{
-   color: lightgreen;
+   color: red;
 }
 
 .modalContent_btn {
@@ -107,11 +108,13 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    border: 1px solid gray;
 }
 
 .modalContent_btn:hover {
-    background-color: white;
+    background-color: transparent;
     color: #2A2036;
+    border: 1px solid #2A2036;
 }
 
 .categoryItem{
