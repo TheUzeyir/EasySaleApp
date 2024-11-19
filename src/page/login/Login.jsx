@@ -1,126 +1,128 @@
 import React, { useState } from "react";
-import userIcon from "../../img/user.svg"; // Replace with an appropriate icon if necessary
+import userIcon from "../../img/user.svg";
 import passwordIcon from "../../img/password.svg";
 import styles from "./SignUp.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import backImg from "../../img/loginImg.png"
+import backImg from "../../img/loginImg.png";
 
 const Login = () => {
   const [data, setData] = useState({
-    userName: "", // Changed from email to userName
+    userName: "", // API'nin beklediği "userName" alanı
     password: "",
   });
-  const navigate=useNavigate()
 
-  const [touched, setTouched] = useState({});
+  const navigate = useNavigate();
 
-  // Verileri API'ye gönderme fonksiyonu
+  // API'ye POST isteği gönderme
   const checkData = async (obj) => {
-    const { userName, password } = obj;
     const urlApi = `http://restartbaku-001-site3.htempurl.com/api/auth`;
-    const payload = {
-      userName: userName.toLowerCase(), // API'den beklenen userName
-      password: password, // API'den beklenen password
-    };
 
     try {
-      // API'ye post isteği gönderiyoruz
-      const response = await axios.post(urlApi, payload, {
+      console.log("Gönderilen veri:", obj); // Veriyi kontrol edin
+
+      const response = await axios.post(urlApi, obj, {
         headers: {
-          "Content-Type": "application/json", // JSON formatında veri gönderiyoruz
+          "Content-Type": "application/json",
         },
       });
 
-      // API yanıtını kontrol et
-      console.log("API Response:", response);
+      console.log("API Yanıtı:", response);
 
-      // Eğer token dönerse, bunu localStorage'a kaydediyoruz
+      // Yanıtın içinde token olup olmadığını kontrol edelim
       if (response.data && response.data.token) {
+        console.log("Token Bulundu:", response.data.token); // Token'ı konsola yazdır
         localStorage.setItem("authToken", response.data.token);
         toast.success("You logged in successfully.");
+        navigate("/dashboard"); // Başarılı girişte yönlendirme
+      } else if (response.data && response.data.message) {
+        // API'nin hata mesajını kontrol et
+        toast.error(response.data.message || "Your username or password is incorrect.");
       } else {
-        toast.error("Your password or username is incorrect.");
+        // Beklenmeyen durumlar için hata mesajı
+        toast.error("Your username or password is incorrect.");
       }
     } catch (error) {
-      // Hata durumunda mesaj
-      console.error("Login Error:", error);
+      // Hata durumlarını ele alma
+      console.error("Login Hatası:", error);
+
       if (error.response) {
-        // Eğer API yanıtı varsa, yanıtı konsola yazdır
-        console.error("API Error Response:", error.response.data);
-        toast.error(`Error: ${error.response.data.message || "Something went wrong!"}`);
+        console.error("API Hatası Yanıtı:", error.response.data);
+        toast.error(
+          `Error: ${
+            error.response.data.message ||
+            error.response.statusText ||
+            "Something went wrong!"
+          }`
+        );
       } else {
-        toast.error("Something went wrong! Please try again.");
+        toast.error("Network error. Please check your connection.");
       }
     }
   };
 
-  // Kullanıcı verilerini değiştirme
+  // Input değişikliklerini dinleyen fonksiyon
   const changeHandler = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
-  // Input alanlarına odaklanıldığında "touched" durumunu güncelleme
-  const focusHandler = (event) => {
-    setTouched({ ...touched, [event.target.name]: true });
-  };
+  // Form submit edildiğinde çalışacak fonksiyon
   const submitHandler = (event) => {
     event.preventDefault();
-    checkData(data); // Veriyi API'ye gönder
-  };
-  const handleButtonClick = () => {
-    checkData(data); // Veriyi API'ye gönder
+    if (data.userName && data.password) {
+      console.log("Form gönderilmeden önceki veri:", data); // Form verisi konsola yazdırılır
+      checkData(data); // Formdaki verileri API'ye gönder
+    } else {
+      toast.error("Please fill in all fields.");
+    }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-      <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
-        <h2>Sign In</h2>
-        <div>
-          <div className={styles.Input}>
-            <input
-              type="text"
-              name="userName" // Changed to userName
-              value={data.userName} // Bind to userName
-              placeholder="Username" // Updated placeholder
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={userIcon} alt="Username icon" />
+        <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
+          <h2>Sign In</h2>
+          <div>
+            <div className={styles.Input}>
+              <input
+                type="text"
+                name="userName"
+                value={data.userName}
+                placeholder="Username"
+                onChange={changeHandler}
+                autoComplete="off"
+              />
+              <img src={userIcon} alt="User Icon" />
+            </div>
           </div>
-        </div>
-        <div>
-          <div className={styles.Input}>
-            <input
-              type="password"
-              name="password"
-              value={data.password}
-              placeholder="Password"
-              onChange={changeHandler}
-              onFocus={focusHandler}
-              autoComplete="off"
-            />
-            <img src={passwordIcon} alt="Password icon" />
+          <div>
+            <div className={styles.Input}>
+              <input
+                type="password"
+                name="password"
+                value={data.password}
+                placeholder="Password"
+                onChange={changeHandler}
+                autoComplete="off"
+              />
+              <img src={passwordIcon} alt="Password Icon" />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <button onClick={()=>navigate('/signup')} className={styles.loginNavigateBtn} type="submit">Login</button>
-          <span style={{ color: "red", textAlign: "center", display: "inline-block", width: "100%" }}>
-            Don't have an account? <Link to="/signup">Create account</Link>
-          </span>
-        </div>
-      </form>
-        <button type="button" onClick={handleButtonClick} className={styles.loginBtn}>
-          Send Data to API
-        </button>
-      <ToastContainer />
+          <button type="submit" className={styles.loginBtn}>
+            Login
+          </button>
+          <div>
+            <span style={{ color: "red", textAlign: "center", display: "inline-block", width: "100%" }}>
+              Don't have an account? <Link to="/signup">Create account</Link>
+            </span>
+          </div>
+        </form>
+        <ToastContainer />
       </div>
-      <img src={backImg} alt={backImg} className={styles.LoginSignUpBackImg}/>
+      <img src={backImg} alt="Background" className={styles.LoginSignUpBackImg} />
     </div>
   );
 };
