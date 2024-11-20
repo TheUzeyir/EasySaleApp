@@ -209,7 +209,7 @@
   margin-top: 10px;
   padding: 10px 15px;
   border: none;
-  background: transparent;
+  background: black !important;
   color: white;
   border: 1px solid white;
   border-radius: 4px;
@@ -217,12 +217,21 @@
 }
 
 .loginBtn:hover {
-  color: blue;
+  background: transparent !important;
+  color: black !important;
+  border: 2px solid black !important;
+  font-size: 20px;
 }
 
 .loginNavigateBtn {
   color: blue !important;
   font-size: 20px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 @media (max-width: 568px) {
