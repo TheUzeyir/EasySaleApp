@@ -27,34 +27,46 @@ const Login = () => {
   const changeHandler = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
-
   const submitHandler = async (event) => {
     event.preventDefault();
+  
     if (data.userName && data.password) {
+      console.log("User Name from data state:", data.userName); // Log the username from the state
+  
       try {
         const response = await axios.post("http://restartbaku-001-site3.htempurl.com/api/auth", data, {
           headers: {
             "Content-Type": "application/json",
           },
         });
-
-        // Check if response is successful (200 OK) and contains data
-        if (response.status === 200 && response.data) {
-          console.log("API Response:", response); // Optional: Log the API response
-          localStorage.setItem("authToken", response.data.token);
-          navigate("/"); // Redirect to main if data is found
+  
+        // Tam yanıtı konsola yaz
+        console.log("Tam Yanıt:", response.data);
+  
+        if (response.status === 200 && response.data.isSuccessful) {
+          // Extract userName from the response data
+          const userName = response.data.data.userModel?.userName;
+  
+          if (userName) {
+            console.log("User Name from response:", userName); // Log the userName from the API response
+          } else {
+            console.log("User name not found in the response."); // If userName is not available
+          }
+  
+          localStorage.setItem("authToken", response.data.token); // Token'i kaydet
+          navigate("/"); // Ana sayfaya yönlendir
         } else {
-          errorMessages("Data not found"); // Show error popup if no data found
+          errorMessages("Data not found");
         }
       } catch (error) {
         console.error("Login error", error);
-        errorMessages(); // Show error popup for API errors
+        errorMessages();
       }
     } else {
-      errorMessages("Please fill in both username and password."); // Show error popup for validation errors
+      errorMessages("Please fill in both username and password.");
     }
   };
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
