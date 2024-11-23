@@ -4,16 +4,17 @@ import passwordIcon from "../../img/password.svg";
 import styles from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import backImg from "../../img/loginImg.png";
 import Swal from "sweetalert2";
+import backImg from "../../img/loginImg.png";
+
 
 const Login = () => {
   const errorMessages = (message) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: message || "Istifadeci tapilmadi, xais olunur qeydiyyatdan kecin",
-      footer: '<a href="/signup">Qeydiyyatdan kecmek ucun click et!</a>',
+      text: message || "Kullanıcı bulunamadı, lütfen kayıt olun.",
+      footer: '<a href="/signup">Kayıt olmak için buraya tıklayın!</a>',
     });
   };
 
@@ -27,61 +28,70 @@ const Login = () => {
   const changeHandler = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
+
   const submitHandler = async (event) => {
     event.preventDefault();
-  
+
     if (data.userName && data.password) {
-      console.log("User Name from data state:", data.userName); // Log the username from the state
-  
+      console.log("Gönderilen Kullanıcı Adı:", data.userName);
+      console.log("Gönderilen Şifre:", data.password);
+
       try {
-        const response = await axios.post("http://restartbaku-001-site3.htempurl.com/api/auth", data, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-  
-        // Tam yanıtı konsola yaz
-        console.log("Tam Yanıt:", response.data);
-  
-        if (response.status === 200 && response.data.isSuccessful) {
-          // Extract userName from the response data
-          const userName = response.data.data.userModel?.userName;
-  
-          if (userName) {
-            console.log("User Name from response:", userName); // Log the userName from the API response
-          } else {
-            console.log("User name not found in the response."); // If userName is not available
+        const response = await axios.post(
+          "http://restartbaku-001-site3.htempurl.com/api/auth",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-  
+        );
+
+        console.log("Tam Yanıt:", response.data);
+
+        if (response.status === 200 && response.data.isSuccessful) {
+          const userName = response.data.data.userModel?.userName;
+          console.log("Gelen Kullanıcı Adı:", userName);
+
+          if (userName) {
+            localStorage.setItem("userName", userName); // Kullanıcı adını kaydet
+          } else {
+            console.error("Kullanıcı adı bulunamadı.");
+          }
+
           localStorage.setItem("authToken", response.data.token); // Token'i kaydet
           navigate("/"); // Ana sayfaya yönlendir
         } else {
-          errorMessages("Data not found");
+          errorMessages("Kullanıcı bulunamadı.");
         }
       } catch (error) {
         console.error("Login error", error);
         errorMessages();
       }
     } else {
-      errorMessages("Please fill in both username and password.");
+      errorMessages("Lütfen kullanıcı adı ve şifreyi doldurun.");
     }
   };
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
-          <h2>Sign In</h2>
+        <form
+          className={styles.formLogin}
+          onSubmit={submitHandler}
+          autoComplete="off"
+        >
+          <h2>Giriş Yap</h2>
           <div>
             <div className={styles.Input}>
               <input
                 type="text"
                 name="userName"
                 value={data.userName}
-                placeholder="Username"
+                placeholder="Kullanıcı Adı"
                 onChange={changeHandler}
               />
-              <img src={userIcon} alt="User Icon" />
+              <img src={userIcon} alt="Kullanıcı İkonu" />
             </div>
           </div>
           <div>
@@ -90,18 +100,19 @@ const Login = () => {
                 type="password"
                 name="password"
                 value={data.password}
-                placeholder="Password"
+                placeholder="Şifre"
                 onChange={changeHandler}
               />
-              <img src={passwordIcon} alt="Password Icon" />
+              <img src={passwordIcon} alt="Şifre İkonu" />
             </div>
           </div>
           <button type="submit" className={styles.loginBtn}>
-            Login
+            Giriş Yap
           </button>
           <div>
             <span>
-              Don't have an account? <Link to="/signup">Create account</Link>
+              Hesabınız yok mu?{" "}
+              <Link to="/signup">Hesap oluşturun</Link>
             </span>
           </div>
         </form>

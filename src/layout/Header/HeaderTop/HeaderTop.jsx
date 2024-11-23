@@ -1,56 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { FaUser, FaRegHeart } from "react-icons/fa";
 import style from "../header.module.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderTop() {
   const navigate = useNavigate();
-  const cities = ['Az', 'Rus', 'En'];
-  const [selectedCity, setSelectedCity] = useState('Az');
-  const [user, setUser] = useState(null); // Kullanıcı bilgilerini tutmak için state
-  const [loading, setLoading] = useState(false); // Yükleniyor durumu için state
+  const cities = ["Az", "Rus", "En"];
+  const [selectedCity, setSelectedCity] = useState("Az");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleCityChange = (event) => {
     setSelectedCity(event.target.value);
   };
 
-  // Giriş işlemi
-  const handleLogin = async () => {
-    setLoading(true);
-
-    try {
-      const response = await fetch("http://restartbaku-001-site3.htempurl.com/api/auth", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: "user@example.com", // Gerçek e-posta girilmeli
-          password: "123456", // Gerçek şifre girilmeli
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data); // Gelen kullanıcı bilgilerini state'e kaydediyoruz
-        console.log("User Logged In:", data); // Log'a yazdırıyoruz
-        navigate("/logIn"); // Giriş sonrası başka bir sayfaya yönlendirme
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-    } finally {
-      setLoading(false); // Yükleniyor durumunu kapatıyoruz
+  useEffect(() => {
+    const savedUserName = localStorage.getItem("userName");
+    if (savedUserName) {
+      setUser({ username: savedUserName }); // Kullanıcı bilgilerini kaydet
     }
-  };
+    setLoading(false); // Kontrol tamamlandı
+  }, []);
 
   return (
     <div className={style.headerTop}>
       <div className="container">
         <div className={style.headerTop_container}>
           <div className={style.headerTop_container_left}>
-            <div className={style.contactNum}>Dəstək: (077) 613-59-59</div>
+            <div className={style.contactNum}>Destek: (077) 613-59-59</div>
           </div>
           <div className={style.headerTop_container_right}>
             <select
@@ -73,15 +50,19 @@ export default function HeaderTop() {
               onClick={() => navigate("/likedPage")}
             >
               <FaRegHeart className={style.headerTop_container_right_icon} />
-              <span>Sevimlilər</span>
+              <span>Favoriler</span>
             </a>
             <a
               className={style.headerTop_container_right_item}
-              onClick={handleLogin}
+              onClick={() => navigate("/profile")}
             >
               <FaUser className={style.headerTop_container_right_icon} />
               <span>
-                {loading ? "Giriş yapılıyor..." : user ? "" : "Giriş"} {/* Eğer kullanıcı varsa "Giriş" metnini kaldırıyoruz */}
+                {loading
+                  ? "Yükleniyor..."
+                  : user
+                  ? `${user.username}`
+                  : "Giriş"}
               </span>
             </a>
           </div>
@@ -89,5 +70,4 @@ export default function HeaderTop() {
       </div>
     </div>
   );
-
 }
