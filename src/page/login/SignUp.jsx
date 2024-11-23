@@ -106,19 +106,30 @@ const SignUp = () => {
       userPassword: data.password,
       confirmPassword: data.confirmPassword,
     };
-
+  
     try {
       const response = await fetch(apiUrl, {
-        method: "POST", // POST isteği yapılacak
+        method: "POST", 
         headers: {
-          "Content-Type": "application/json", // JSON formatında veri gönderiyoruz
+          "Content-Type": "application/json", 
         },
-        body: JSON.stringify(payload), // Payload'ı JSON formatında gönderiyoruz
+        body: JSON.stringify(payload),
       });
-
-      if (response.ok) { // Eğer yanıt başarılıysa
+  
+      if (response.ok) { 
         const responseData = await response.json();
         toast.success("Data successfully sent to the API!");
+          setData({
+          name: "",
+          firstName: "",
+          lastName: "",
+          phone: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          IsAccepted: false,
+        });
+          setTouched({});
       } else if (response.status === 409) {
         toast.error("Username or email already exists. Please choose a different one.");
       } else {
@@ -129,6 +140,7 @@ const SignUp = () => {
       console.error("API Error:", error);
     }
   };
+  
 
   return (
     <div className={styles.container}>
@@ -191,7 +203,7 @@ const SignUp = () => {
         </div>
       </form>
         <button className={styles.loginBtn} onClick={sendDataToAPI} >
-          Send Data to API
+          Qeydiyyati Tamamlayin
         </button>
       <ToastContainer />
       </div>
