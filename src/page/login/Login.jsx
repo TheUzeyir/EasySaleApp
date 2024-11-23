@@ -83,7 +83,7 @@ const Login = () => {
                 type="text"
                 name="userName"
                 value={data.userName}
-                placeholder="Kullanıcı Adı"
+                placeholder="Istifadeci Email"
                 onChange={changeHandler}
               />
               <img src={userIcon} alt="Kullanıcı İkonu" />
