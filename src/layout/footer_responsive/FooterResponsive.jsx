@@ -1,4 +1,4 @@
-import Reac,{useState} from 'react'
+import Reac,{useState,useEffect} from 'react'
 import { FaHome } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import { FaCirclePlus } from "react-icons/fa6";
@@ -8,15 +8,35 @@ import style from "./footerResponsive.module.css"
 import { useNavigate } from 'react-router-dom';
 import CategoryBox from '../../components/categoryBox/CategoryBox';
 
-
+ 
 const FooterResponsive = () => {
     const navigate=useNavigate()
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [showCategories, setShowCategories] = useState(false);
 
     const handleCategoryClick = () => {
         setShowCategories(prev => !prev); 
     };
 
+    useEffect(()=>{
+        const savedUserName =localStorage.getItem("userName")
+        if (savedUserName) {
+            setUser(savedUserName);
+        }
+        setLoading(false);
+      }, []);   
+
+    const handleLoginClick = () => {
+        if (user) {
+             {
+           navigate('/profil')
+          }
+        } else {
+          navigate("/login");
+        }
+      };
+      
   return (
     <div className={style.FooterResponsive_container}>
         <div className="container">
@@ -26,7 +46,15 @@ const FooterResponsive = () => {
                     <div className={style.FooterResponsive_card} onClick={()=>navigate('/')}><FaHome/><span  className={style.FooterResponsive_card_text}>Ana Sehife</span></div>
                     <div className={style.FooterResponsive_card} onClick={()=>navigate('/CategoryBox')}><BiSolidCategory/><span className={style.FooterResponsive_card_text}>Kateqoriyalar</span></div>
                     <div className={style.FooterResponsive_card} onClick={()=>navigate('/likedPage')}><FaHeart/><span className={style.FooterResponsive_card_text}>Beyendiklerim</span></div>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/logIn')}><IoMdPerson/><span className={style.FooterResponsive_card_text}>Giris</span></div>
+                    <div className={style.FooterResponsive_card} onClick={handleLoginClick}><IoMdPerson/><span className={style.FooterResponsive_card_text}>
+                        {
+                            loading
+                            ? "Yukleniyor..."
+                            : user
+                            ? `${user}`
+                            :"Giriş"
+                        }
+                        </span></div>
                 </div>
             </div>
         </div>

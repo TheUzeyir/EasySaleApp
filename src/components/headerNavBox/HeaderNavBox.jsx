@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect}from 'react'
 import { IoMdCloseCircle } from "react-icons/io";
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
@@ -9,6 +9,28 @@ import { FaEarthOceania } from "react-icons/fa6";
 
 const HeaderNavBox = () => {
 const navigate = useNavigate();
+const [user, setUser] = useState(null);
+const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const savedUserName = localStorage.getItem("userName");
+    if (savedUserName) {
+      setUser(savedUserName);
+    }
+    setLoading(false);
+  }, []);
+
+  const handleLoginClick = () => {
+    if (user) {
+     {
+       navigate('/profil')
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
 
   return (
     <div className={style.nawBar_responsive}>
@@ -17,8 +39,14 @@ const navigate = useNavigate();
             <IoMdCloseCircle className={style.nawBar_responsive_header_icon} onClick={()=>navigate(-1)}/>
         </div>
         <div className={style.nawBar_responsive_main}>
-            <div className={style.nawBar_responsive_main_box} onClick={() => navigate('/logIn')}>
-                <IoMdPerson /> Giris
+            <div className={style.nawBar_responsive_main_box} onClick={handleLoginClick}>
+                <IoMdPerson /> {
+                    loading
+                    ? "Yukleniyor..."
+                    : user
+                    ? `${user}`
+                    :"Giriş"
+                } 
             </div>
             <div className={style.nawBar_responsive_main_box} onClick={() => navigate('/likedPage')}>
                 <FaHeart /> Beyendiklerim

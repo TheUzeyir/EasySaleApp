@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaUser, FaRegHeart } from "react-icons/fa";
-import style from "../header.module.css";
+import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import style from "../header.module.css";
+import HeaderProfileCard from "../headerProfileCard/HeaderProfileCard";
 
 export default function HeaderTop() {
   const navigate = useNavigate();
@@ -9,17 +11,48 @@ export default function HeaderTop() {
   const [selectedCity, setSelectedCity] = useState("Az");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isProfileCardOpen, setProfileCardOpen] = useState(false);
+  const profileCardRef = useRef(null);
 
   const handleCityChange = (event) => {
     setSelectedCity(event.target.value);
   };
 
+  const openProfileCard = () => setProfileCardOpen(true);
+  const closeProfileCard = () => setProfileCardOpen(false);
+
+  const handleLoginClick = () => {
+    if (user) {
+      if (isProfileCardOpen) {
+        closeProfileCard();
+      } else {
+        openProfileCard();
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
     const savedUserName = localStorage.getItem("userName");
     if (savedUserName) {
-      setUser({ username: savedUserName }); // Kullanıcı bilgilerini kaydet
+      setUser({ username: savedUserName });
     }
-    setLoading(false); // Kontrol tamamlandı
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        profileCardRef.current &&
+        !profileCardRef.current.contains(event.target)
+      ) {
+        closeProfileCard(); // Dışarıya tıklanınca kapat
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -54,20 +87,24 @@ export default function HeaderTop() {
             </a>
             <a
               className={style.headerTop_container_right_item}
-              onClick={() => navigate("/login")}
+              onClick={handleLoginClick}
             >
               <FaUser className={style.headerTop_container_right_icon} />
               <span>
-                {loading
-                  ? "Yükleniyor..."
-                  : user
-                  ? `${user.username}`
-                  : "Giriş"}
+                {loading ? "Yükleniyor..." : user ? <IoIosArrowDown /> : "Giriş"}
               </span>
             </a>
           </div>
         </div>
       </div>
+      {isProfileCardOpen && (
+        <div
+          ref={profileCardRef}
+          onClick={(e) => e.stopPropagation()} // Kart üzerindeki tıklamaları durdur
+        >
+          <HeaderProfileCard />
+        </div>
+      )}
     </div>
   );
 }

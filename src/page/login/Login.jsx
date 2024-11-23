@@ -33,8 +33,6 @@ const Login = () => {
     event.preventDefault();
 
     if (data.userName && data.password) {
-      console.log("Gönderilen Kullanıcı Adı:", data.userName);
-      console.log("Gönderilen Şifre:", data.password);
 
       try {
         const response = await axios.post(
@@ -47,12 +45,9 @@ const Login = () => {
           }
         );
 
-        console.log("Tam Yanıt:", response.data);
 
         if (response.status === 200 && response.data.isSuccessful) {
           const userName = response.data.data.userModel?.userName;
-          console.log("Gelen Kullanıcı Adı:", userName);
-
           if (userName) {
             localStorage.setItem("userName", userName); // Kullanıcı adını kaydet
           } else {

@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NewProductAdd from './page/newProductAdd/NewProductAdd'
 import LogIn from './page/login/Login'
 import SignUp from './page/login/SignUp'
-import ProductCard from './components/productCard/ProductCard'
+import ProfilePage from './page/profile/ProfilePage'
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
         <Route path='/categoryBox' element={<CategoryBox />} />
         <Route path='/headerBox' element={<HeaderNavBox />} />
         <Route path='/yeniElan' element={<NewProductAdd />} />
-        <Route path='/profile' element={<ProductCard />} />
+        <Route path='/profil' element={<ProfilePage />} />
       </Routes>
     </Router>
   )
