@@ -54,7 +54,7 @@ export default function HeaderTop() {
             </a>
             <a
               className={style.headerTop_container_right_item}
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/login")}
             >
               <FaUser className={style.headerTop_container_right_icon} />
               <span>
