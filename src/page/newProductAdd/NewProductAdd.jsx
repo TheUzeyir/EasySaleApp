@@ -8,6 +8,47 @@ const NewProductAdd = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [parameters, setParameters] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true); // Yüklənmə vəziyyəti
+  const [loadingParameters, setLoadingParameters] = useState(false); // Parametrlərin yüklənmə vəziyyəti
+
+  const cities = ['Bakı', 'Gəncə', 'Sumqayıt', 'Şəki', 'Lənkəran'];
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setLoadingCategories(true);
+      try {
+        const response = await fetch('http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=1');
+        const data = await response.json();
+        setCategories(data.data);
+      } catch (error) {
+        console.error("Hata oluştu:", error);
+      } finally {
+        setLoadingCategories(false); // Yüklənmə tamamlanıb
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const fetchParameters = async () => {
+      if (selectedCategory) {
+        setLoadingParameters(true);
+        try {
+          const response = await fetch(`http://restartbaku-001-site3.htempurl.com/api/Category/get-parameters?LanguageCode=1&CategoryId=${selectedCategory}&RequestFrontType=add`);
+          const data = await response.json();
+          setParameters(data.data);
+        } catch (error) {
+          console.error("Hata oluştu:", error);
+        } finally {
+          setLoadingParameters(false);
+        }
+      }
+    };
+
+    fetchParameters();
+  }, [selectedCategory]);
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -17,20 +58,25 @@ const NewProductAdd = () => {
     setSelectedCity(event.target.value);
   };
 
-  const cities = ['Bakı', 'Gəncə', 'Sumqayıt', 'Şəki', 'Lənkəran'];
-
-  useEffect(() => {
-    // API-dən kateqoriyaları çəkmək üçün fetch istifadə edirik
-    fetch('http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=1')
-      .then(response => response.json())
-      .then(data => {
-        // Məlumatları state-ə yükləyirik
-        setCategories(data.data);
-      })
-      .catch(error => {
-        console.error("Hata oluştu:", error);
-      });
-  }, []);
+  const renderParameterInput = (parameter) => {
+    switch (parameter.parameterTypeTitle) {
+      case 'string':
+        return <input key={parameter.parameterId} type="text" className={style.addBox_left_box_top_card_item} />;
+      case 'select':
+        return (
+          <select key={parameter.parameterId} className={style.addBox_left_box_top_card_item}>
+            <option value="">--Seçin--</option>
+            {/* Burada select-in optionslarını statik olaraq yazdım, amma API-dən gələn data ilə doldura bilərsiniz */}
+            <option value="option1">Seçim 1</option>
+            <option value="option2">Seçim 2</option>
+          </select>
+        );
+      case 'int':
+        return <input key={parameter.parameterId} type="number" className={style.addBox_left_box_top_card_item} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className={style.addBox_main_container}>
@@ -47,14 +93,18 @@ const NewProductAdd = () => {
                     value={selectedCategory}
                     onChange={handleCategoryChange}
                     className={style.addBox_left_box_top_card_item}
+                    disabled={loadingCategories} // Kategoriyalar yüklənənə qədər disable et
                   >
-                    <option value="">--Kat seçin--</option>
-                    {/* API-dən alınan kateqoriyaları buraya əlavə edirik */}
-                    {categories.map((category) => (
-                      <option key={category.categoryId} value={category.categoryId}>
-                        {category.categoryTitle}
-                      </option>
-                    ))}
+                    <option value="">--Kateqoriya seçin--</option>
+                    {loadingCategories ? (
+                      <option disabled>Yüklənir...</option>
+                    ) : (
+                      categories.map((category) => (
+                        <option key={category.categoryId} value={category.categoryId}>
+                          {category.categoryTitle}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 
@@ -71,20 +121,33 @@ const NewProductAdd = () => {
                     ))}
                   </select>
                 </div>
+
                 <div className={style.addBox_left_box_top_card}>
                   Qiymət, AZN
                   <div className={style.addBox_left_box_top_card_item}>
                     <input required type="text" className={style.addBox_left_box_top_card_item_input} /> AZN
                   </div>
                 </div>
+
                 <div className={style.addBox_left_box_top_card}>
                   Məzmun
                   <textarea
                     className={style.addBox_left_box_top_card_item_textArea}
-                    name=""
-                    id=""
+                    name="content"
+                    id="content"
                   ></textarea>
                 </div>
+
+                {loadingParameters ? (
+                  <div className={style.addBox_left_box_top_card}>Parametrlər yüklənir...</div>
+                ) : (
+                  parameters.length > 0 && parameters.map(parameter => (
+                    <div className={style.addBox_left_box_top_card} key={parameter.parameterId}>
+                      {parameter.parameterTitle}
+                      {renderParameterInput(parameter)}
+                    </div>
+                  ))
+                )}
               </div>
 
               <div className={style.addBox_left_box_main}>
