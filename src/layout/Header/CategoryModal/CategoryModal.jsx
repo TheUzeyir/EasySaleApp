@@ -19,6 +19,15 @@ const CategoryModal = ({ closeModal }) => {
           const filteredCategories = result.data.filter(
             (category) => category.parentId === null
           );
+          
+          // ParentId'si null olmayan kategorileri ilgili ana kategorilere ekle
+          filteredCategories.forEach(category => {
+            // Bu kategoriye bağlı alt kategorileri bul
+            category.childCategories = result.data.filter(
+              (subCategory) => subCategory.parentId === category.categoryId
+            );
+          });
+
           setCategories(filteredCategories);
         }
       } catch (error) {
@@ -41,7 +50,7 @@ const CategoryModal = ({ closeModal }) => {
                 onMouseEnter={() => setSelectedCategory(category)}
                 className={style.categoryItem}
               >
-                {/* Kategoriyi seçtiğinizde products özelliğini kullanmadan önce kontrol edin */}
+                {/* Kategoriyi seçtiğinizde icon ve diğer bilgileri ekleyebilirsiniz */}
                 <span className={style.categoryIcon}>{/* kategori.icon yerine doğru veri kullanın */}</span>
                 {category.categoryTitle}
               </div>
@@ -49,18 +58,21 @@ const CategoryModal = ({ closeModal }) => {
           </div>
           <div className={style.products}>
             {selectedCategory ? (
-              <ul className={style.products_ul}>
-                {/* selectedCategory.products var mı diye kontrol et */}
-                {selectedCategory.products && selectedCategory.products.length > 0 ? (
-                  selectedCategory.products.map((product, index) => (
-                    <li className={style.products_li} key={index}>
-                      {product} <IoIosArrowForward />
-                    </li>
-                  ))
+              <>
+                <p>Seçilen Kategori: {selectedCategory.categoryTitle}</p>
+                {/* Alt kategorileri listele */}
+                {selectedCategory.childCategories && selectedCategory.childCategories.length > 0 ? (
+                  <ul className={style.products_ul}>
+                    {selectedCategory.childCategories.map((childCategory, index) => (
+                      <li className={style.products_li} key={index}>
+                        {childCategory.categoryTitle} <IoIosArrowForward />
+                      </li>
+                    ))}
+                  </ul>
                 ) : (
-                  <p>Bu kategorinin ürünü bulunmamaktadır.</p>
+                  <p>Bu kategorinin alt kategorisi bulunmamaktadır.</p>
                 )}
-              </ul>
+              </>
             ) : (
               <p>Məhsulları görmək üçün kateqoriya seçin</p>
             )}
